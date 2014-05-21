@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +17,7 @@ import biz.noip.anonimofanor.status.StatusPublicacao;
 import biz.noip.anonimofanor.status.StatusVisibilidade;
 
 @Entity
-public class Resumo implements Serializable{
+public class Resumo implements Serializable {
 
 	/**
 	 * 
@@ -23,32 +25,36 @@ public class Resumo implements Serializable{
 	private static final long serialVersionUID = -6635019759993770610L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name="id_resumo")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_resumo")
 	private Long id;
-	
-	@Column(length=120, nullable=false)
+
+	@Column(length = 120, nullable = false)
 	private String titulo;
-	
-	@Column(columnDefinition="TEXT", nullable=true)
+
+	@Column(columnDefinition = "TEXT", nullable = true)
 	private String texto;
+
+	// @Column(name="status_publicacao", nullable=false)
+	// private StatusPublicacao statusPublicacao;
+
+	@Enumerated(EnumType.ORDINAL)
+	public StatusPublicacao statusPublicacao;
+
+//	@Column(name = "status_visibilidade", nullable = false)
+//	private StatusVisibilidade statusVisibilidade;
 	
-	@Column(name="status_publicacao", nullable=false)
-	private StatusPublicacao statusPublicacao;
-	
-	@Column(name="status_visibilidade", nullable=false)
-	private StatusVisibilidade statusVisibilidade;
-	
-	@Column(length=70, nullable=false)
+	@Enumerated(EnumType.ORDINAL)
+	public StatusVisibilidade statusVisibilidade;
+
+	@Column(length = 70, nullable = false)
 	private String area;
-	
+
 	@ManyToOne
 	private Perfil perfil;
-	
+
 	@ManyToMany
 	private Set<Keyword> keywords;
-	
-	
 
 	public Set<Keyword> getKeywords() {
 		return keywords;
@@ -106,13 +112,12 @@ public class Resumo implements Serializable{
 		this.texto = texto;
 	}
 
-	public StatusPublicacao getStatusPublicacao() {
+	public StatusPublicacao getStatuPublicacao() {
 		return statusPublicacao;
 	}
 
-	public void setStatusPublicacao(StatusPublicacao statusPublicacao) {
-		this.statusPublicacao = statusPublicacao;
+	public void setStatuPublicacao(StatusPublicacao statuPublicacao) {
+		this.statusPublicacao = statuPublicacao;
 	}
-	
-	
+
 }
