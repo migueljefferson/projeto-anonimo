@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface GenericDAO<T, KEY> {
 	
+	
 	public T salvar(T obj);
 	
 	public T atualizar(T obj);

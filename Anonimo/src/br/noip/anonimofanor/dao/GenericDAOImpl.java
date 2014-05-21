@@ -13,6 +13,7 @@ public class GenericDAOImpl<T, KEY> implements GenericDAO<T, KEY>{
 	private Class<?> entityClass;
 	private String nameTable;
 	
+	
 	public GenericDAOImpl(Class<?> entityClass) {
 		this.entityClass = entityClass;
 	}
