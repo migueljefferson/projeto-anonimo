@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Perfil implements Serializable{
@@ -33,8 +34,19 @@ public class Perfil implements Serializable{
 	@Column(length=45, nullable=true)
 	private String escolaridade;
 	
+	@OneToOne
+	private Usuario usuario;
+	
 	@OneToMany
 	private List<Resumo> resumos;
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 
 	public Long getId() {
 		return id;
