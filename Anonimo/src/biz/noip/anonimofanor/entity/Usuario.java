@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 //  suas atividades são as seguintes
 //Criar as entidades Usuario e Amizade
@@ -33,8 +34,19 @@ public class Usuario {
 	@Column(nullable = false)
 	private Date dataUltimoLogin;
 
+	@OneToOne
+	private Perfil perfil;
+	
 	@OneToMany(mappedBy = "usuario", targetEntity = Amizade.class, fetch = FetchType.LAZY)
 	private List<Amizade> amizades;
+
+	public Perfil getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
+	}
 
 	public Long getId() {
 		return id;
