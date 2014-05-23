@@ -14,8 +14,9 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 	private Class<?> entityClass;
 	private String nameTable;
 
-	public GenericDAOImpl(Class<?> entityClass) {
+	public GenericDAOImpl(Class<?> entityClass, String nameTable) {
 		this.entityClass = entityClass;
+		this.nameTable = nameTable;
 	}
 
 	@Override
@@ -48,7 +49,7 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 	@Override
 	public List<T> listar() {
 		Query query = this.entityManager.createQuery("SELECT t FROM "
-				+ this.nameTable, this.entityClass);
+				+ this.nameTable + " t", this.entityClass);
 		List<T> list = (List<T>) query.getResultList();
 		this.entityManager.close();
 
