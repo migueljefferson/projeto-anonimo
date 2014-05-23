@@ -2,14 +2,14 @@ package biz.noip.anonimofanor.dao;
 
 import java.util.List;
 
-public interface GenericDAO<T, KEY> {
+public interface GenericDAO<T, K> {
 	
 	
 	public T salvar(T obj);
 	
 	public T atualizar(T obj);
 	
-	public T buscarPorId(KEY key);
+	public T buscarPorId(K key);
 	
 	public List<T> listar();
 	

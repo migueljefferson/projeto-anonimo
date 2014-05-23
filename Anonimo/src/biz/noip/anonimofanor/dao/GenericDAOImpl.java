@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import biz.noip.anonimofanor.util.EntityManagerBuilder;
 
-public class GenericDAOImpl<T, KEY> implements GenericDAO<T, KEY>{
+public class GenericDAOImpl<T, K> implements GenericDAO<T, K>{
 
 	private EntityManager entityManager = EntityManagerBuilder.getEntityManager();
 	private Class<?> entityClass;
@@ -40,7 +40,7 @@ public class GenericDAOImpl<T, KEY> implements GenericDAO<T, KEY>{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public T buscarPorId(KEY key) {
+	public T buscarPorId(K key) {
 		return (T) this.entityManager.find(this.entityClass, key);
 	}
 
