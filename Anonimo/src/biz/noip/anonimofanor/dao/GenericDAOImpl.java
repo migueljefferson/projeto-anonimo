@@ -7,34 +7,34 @@ import javax.persistence.Query;
 
 import biz.noip.anonimofanor.util.EntityManagerBuilder;
 
-public class GenericDAOImpl<T, K> implements GenericDAO<T, K>{
+public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 
-	private EntityManager entityManager = EntityManagerBuilder.getEntityManager();
+	private EntityManager entityManager = EntityManagerBuilder
+			.getEntityManager();
 	private Class<?> entityClass;
 	private String nameTable;
-	
-	
+
 	public GenericDAOImpl(Class<?> entityClass) {
 		this.entityClass = entityClass;
 	}
-	
+
 	@Override
 	public T salvar(T obj) {
-		
+
 		this.entityManager.getTransaction().begin();
 		this.entityManager.persist(obj);
 		this.entityManager.getTransaction().commit();
-		
+
 		return obj;
 	}
 
 	@Override
 	public T atualizar(T obj) {
-		
+
 		this.entityManager.getTransaction().begin();
 		this.entityManager.merge(obj);
 		this.entityManager.getTransaction().commit();
-		
+
 		return obj;
 	}
 
@@ -47,10 +47,11 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K>{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> listar() {
-		Query query = this.entityManager.createQuery("SELECT t FROM " + this.nameTable, this.entityClass);
+		Query query = this.entityManager.createQuery("SELECT t FROM "
+				+ this.nameTable, this.entityClass);
 		List<T> list = (List<T>) query.getResultList();
 		this.entityManager.close();
-		
+
 		return list;
 	}
 
@@ -61,7 +62,9 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K>{
 		this.entityManager.getTransaction().commit();
 		this.entityManager.close();
 	}
-	
-	
-	
+
+	public EntityManager getEntityManager() {
+		return entityManager;
+	}
+
 }
