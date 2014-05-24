@@ -23,7 +23,7 @@ public class Amizade {
 	private Long id;
 
 	@Enumerated(EnumType.ORDINAL)
-	public StatusAmizade statuAmizade;
+	public StatusAmizade statusAmizade;
 
 	@Column(nullable = false)
 	private Date dataAmizade;
@@ -45,11 +45,11 @@ public class Amizade {
 	}
 
 	public StatusAmizade getStatuAmizade() {
-		return statuAmizade;
+		return statusAmizade;
 	}
 
 	public void setStatuAmizade(StatusAmizade statuAmizade) {
-		this.statuAmizade = statuAmizade;
+		this.statusAmizade = statuAmizade;
 	}
 
 	public Date getDataAmizade() {

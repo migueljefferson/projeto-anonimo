@@ -15,4 +15,7 @@ public interface GenericDAO<T, K> {
 	
 	public void excluir(T obj);
 	
+	
+
+
 }
