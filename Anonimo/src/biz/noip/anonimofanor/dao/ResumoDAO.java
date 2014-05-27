@@ -2,34 +2,41 @@ package biz.noip.anonimofanor.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import biz.noip.anonimofanor.entity.Resumo;
-import biz.noip.anonimofanor.util.EntityManagerBuilder;
 
-public class ResumoDAO {
+public class ResumoDAO extends GenericDAOImpl<Resumo, Long> {
 
-	private EntityManager entityManager = EntityManagerBuilder
-			.getEntityManager();
+	public ResumoDAO() {
+		super(Resumo.class, "Resumo");
+
+	}
 
 	@SuppressWarnings("unchecked")
-	public List<Resumo> listarPorStatusPublicacao() {
-		Query query = this.entityManager
-				.createQuery("SELECT statusPublicacao FROM " + "resumo");
+	public List<Resumo> listarPorStatusPublicacao(Integer statusPublicacao) {
+		Query query = this
+				.getEntityManager()
+				.createQuery(
+						"SELECT s FROM resumo s WHERE statuspublicacao = :statuspublicacao",
+						Resumo.class);
+		query.setParameter("statuspublicacao", statusPublicacao);
 		List<Resumo> list = (List<Resumo>) query.getResultList();
-		this.entityManager.close();
 		return list;
 
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Resumo> listarPorStatusVisibilidade() {
-		Query query = this.entityManager
-				.createQuery("SELECT statusvisibilidade FROM " + "resumo");
+	public List<Resumo> listarPorStatusVisibilidade(Integer statusVisibilidade) {
+		Query query = this
+				.getEntityManager()
+				.createQuery(
+						"SELECT s FROM resumo s WHERE statusvisibilidade = :statusvisibilidade",
+						Resumo.class);
+		query.setParameter("statusvisibilidade", statusVisibilidade);
 		List<Resumo> list = (List<Resumo>) query.getResultList();
-		this.entityManager.close();
 		return list;
 
 	}
+
 }
