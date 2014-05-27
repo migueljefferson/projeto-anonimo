@@ -2,24 +2,26 @@ package biz.noip.anonimofanor.dao;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import biz.noip.anonimofanor.entity.Amizade;
-import biz.noip.anonimofanor.util.EntityManagerBuilder;
 
-public class AmizadeDAO {
+public class AmizadeDAO extends GenericDAOImpl<Amizade, Long> {
 
-	private EntityManager entityManager = EntityManagerBuilder
-			.getEntityManager();
+	public AmizadeDAO() {
+		super(Amizade.class, "Amizade");
+
+	}
 
 	@SuppressWarnings("unchecked")
-	public List<Amizade> listarPorStatusAmizade() {
-		Query query = this.entityManager
-				.createQuery("SELECT statusamizade FROM " + "amizade");
+	public List<Amizade> listarPorStatusAmizade(Integer statusAmizade) {
+		Query query = this.getEntityManager().createQuery(
+				"SELECT a FROM amizade a WHERE statusamizade = :statusamizade",
+				Amizade.class);
+		query.setParameter("statusamizade", statusAmizade);
 		List<Amizade> list = (List<Amizade>) query.getResultList();
-		this.entityManager.close();
 		return list;
 
 	}
+
 }
