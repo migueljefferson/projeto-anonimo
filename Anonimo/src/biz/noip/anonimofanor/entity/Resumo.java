@@ -41,9 +41,9 @@ public class Resumo implements Serializable {
 	@Enumerated(EnumType.ORDINAL)
 	public StatusPublicacao statusPublicacao;
 
-//	@Column(name = "status_visibilidade", nullable = false)
-//	private StatusVisibilidade statusVisibilidade;
-	
+	// @Column(name = "status_visibilidade", nullable = false)
+	// private StatusVisibilidade statusVisibilidade;
+
 	@Enumerated(EnumType.ORDINAL)
 	public StatusVisibilidade statusVisibilidade;
 
